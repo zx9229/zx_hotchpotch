@@ -38,20 +38,32 @@ function fun_check() {
 function fun_stop() {
     echo "action [stop] BEG..."
 
-    ip link set ${IFNAME} down
-    if [ $? -ne 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
+    ip addr show ${IFNAME} > /dev/null 2>&1
+    if [ $? -ne 0 ]; then echo "action [stop] END"; return 0; fi
 
     # 猜测: 找到默认路由的名字 (D_I => DefaultInterface ?) (0/0 => 0.0.0.0/0 ?)
     D_I=$(ip route show exact 0/0 | sort -k 7 | head -n 1 | sed -n 's/^default.* dev \([^ ]*\).*/\1/p')
     if [ "${D_I}" == "" ]; then echo "[ERROR]:${LINENO}"; return 1; fi
 
-    ip -6 route add ::/0 dev ${D_I}
+    ip -6 route add ::/0 dev ${D_I} metric 1 mtu 1500
     if [ $? -ne 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
 
     ip -6 route del ::/0 dev ${IFNAME}
     if [ $? -ne 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
 
+    ip link set ${IFNAME} down
+    if [ $? -ne 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
+
     killall -9 tb_userspace
+
+    ip addr show ${IFNAME} > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        ip tuntap del ${IFNAME} mode tun
+        if [ $? -ne 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
+    fi
+    
+    ip addr show ${IFNAME} > /dev/null 2>&1
+    if [ $? -eq 0 ]; then echo "[ERROR]:${LINENO}"; return 1; fi
 
     echo "action [stop] END."
     return 0
