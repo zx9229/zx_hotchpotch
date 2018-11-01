@@ -4,13 +4,13 @@
 #======================================================================#
 AppDir="/root/tb_tun"
 IFNAME="tb-tun"
-Server_IPv4_Address="74.82.46.6"
-Client_IPv4_Address="1.119.141.146"
-Client_IPv6_Address="2001:470:23:11ca::2/64"
+Server_IPv4_Address=""  # 例: 72.52.104.74
+Client_IPv4_Address=""  # 例: 172.82.152.3
+Client_IPv6_Address=""  # 例: 2001:470:1f04:329::2/64
 
 
 
-function fun_check(){
+function fun_check() {
     wget --help  > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[ERROR]:${LINENO}, Please install wget software." 1>&2
@@ -25,6 +25,11 @@ function fun_check(){
 
     if [[ $EUID -ne 0 ]]; then
         echo "[ERROR]:${LINENO}, You must run the script with root privileges." 1>&2
+        exit 1
+    fi
+
+    if [ "${Server_IPv4_Address}" = "" ] || [ "${Client_IPv4_Address}" = "" ] || [ "${Client_IPv6_Address}" = "" ]; then
+        echo "[ERROR]:${LINENO}, You need set value." 1>&2
         exit 1
     fi
 }
