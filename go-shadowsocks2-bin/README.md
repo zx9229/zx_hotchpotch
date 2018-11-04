@@ -4,6 +4,11 @@
 根据`https://github.com/shadowsocks/go-shadowsocks2`的代码编译而成。  
 我私人编译的文件链接如下：  
 https://raw.githubusercontent.com/zx9229/zx_hotchpotch/master/go-shadowsocks2-bin/go-shadowsocks2.tar.xz  
+使用
+```
+./go-shadowsocks2 -s ss://加密方式:密码@主机:端口 -verbose > /dev/null 2>&1 &
+./go-shadowsocks2 -s ss://chacha20-ietf-poly1305:mima@:1080 -verbose > /dev/null 2>&1 &
+```
 编译过程如下：  
 ```shell
 yum -y install golang
