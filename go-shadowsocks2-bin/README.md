@@ -2,6 +2,8 @@
 
 * go-shadowsocks2.tar.xz  
 根据`https://github.com/shadowsocks/go-shadowsocks2`的代码编译而成。  
+我私人编译的文件链接如下：  
+https://raw.githubusercontent.com/zx9229/zx_hotchpotch/master/go-shadowsocks2-bin/go-shadowsocks2.tar.xz  
 编译过程如下：  
 ```shell
 yum -y install golang
