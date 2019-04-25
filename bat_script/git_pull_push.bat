@@ -25,7 +25,8 @@ IF NOT "!ERRORLEVEL!" == "0" (
 ECHO return_value ^( git push ^) is !ERRORLEVEL!  
 GOTO :label_end  
 )  
-REM  
+REM
+ECHO -------------------------------------------  
 )  
 
 :label_end  
