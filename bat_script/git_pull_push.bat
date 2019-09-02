@@ -14,13 +14,13 @@ SET OPERATION_DIR=".\*"
 :: 括号中是通配符,可以指定后缀名,*.* 表示所有文件  
 FOR /D %%a IN ( %OPERATION_DIR% ) DO (  
 REM  
-PUSHD %%a && CHDIR && git pull --rebase && POPD  
+PUSHD %%a && CHDIR && ECHO git_pull && git pull --rebase && POPD  
 IF NOT "!ERRORLEVEL!" == "0" (  
 ECHO return_value ^( git pull ^) is !ERRORLEVEL!  
 GOTO :label_end  
 )  
 REM  
-PUSHD %%a && CHDIR && git push && POPD  
+PUSHD %%a && CHDIR && ECHO git_push && git push          && POPD  
 IF NOT "!ERRORLEVEL!" == "0" (  
 ECHO return_value ^( git push ^) is !ERRORLEVEL!  
 GOTO :label_end  
