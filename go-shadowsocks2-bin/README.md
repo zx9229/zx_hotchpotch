@@ -31,3 +31,6 @@ CGO_ENABLED=0 是一个编译标志，会让构建系统忽略cgo并且静态链
 此标记的值会作为结果文件的父目录名称的后缀。  
 其实，如果使用了-race标记，这个标记会被自动追加且其值会为race。  
 如果我们同时使用了-race标记和-installsuffix，那么在-installsuffix标记的值的后面会再被追加_race，并以此来作为实际使用的后缀。  
+
+* shadowsocks-windows
+[GitHub - shadowsocks/shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)  
