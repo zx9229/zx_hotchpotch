@@ -33,3 +33,10 @@ ECHO -------------------------------------------
 :label_end  
 @ECHO ON  
 PAUSE  
+
+@REM 列出指定凭据: ( git:https://github.com )
+@REM cmdkey    /list:git:https://github.com
+@REM 删除现有凭据:
+@REM cmdkey  /delete:git:https://github.com
+@REM 创建普通凭据:
+@REM cmdkey /generic:git:https://github.com /user:zx9229 /pass
