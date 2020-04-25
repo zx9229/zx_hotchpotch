@@ -7,6 +7,7 @@
 REM 开启变量延迟的设置.  
 SETLOCAL enabledelayedexpansion  
 
+SET TIMTOUT_SECONDS=0
 SET OPERATION_DIR=".\*"  
 
 :: 参数 /R "某目录"  表示需要遍历子文件夹,去掉表示不遍历子文件夹  
@@ -15,12 +16,14 @@ SET OPERATION_DIR=".\*"
 :: 括号中是通配符,可以指定后缀名,*.* 表示所有文件  
 FOR /D %%a IN ( %OPERATION_DIR% ) DO (  
 REM  
+TIMEOUT /T %TIMTOUT_SECONDS% /NOBREAK > NUL
 PUSHD %%a && CHDIR && ECHO git_pull && git pull --rebase && POPD  
 IF NOT "!ERRORLEVEL!" == "0" (  
 ECHO return_value ^( git pull ^) is !ERRORLEVEL!  
 GOTO :label_end  
 )  
 REM  
+TIMEOUT /T %TIMTOUT_SECONDS% /NOBREAK > NUL
 PUSHD %%a && CHDIR && ECHO git_push && git push          && POPD  
 IF NOT "!ERRORLEVEL!" == "0" (  
 ECHO return_value ^( git push ^) is !ERRORLEVEL!  
