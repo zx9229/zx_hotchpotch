@@ -8,6 +8,7 @@ REM 开启变量延迟的设置.
 SETLOCAL enabledelayedexpansion  
 
 SET TIMTOUT_SECONDS=0
+ECHO TIMTOUT_SECONDS=%TIMTOUT_SECONDS%  
 SET OPERATION_DIR=".\*"  
 
 :: 参数 /R "某目录"  表示需要遍历子文件夹,去掉表示不遍历子文件夹  
